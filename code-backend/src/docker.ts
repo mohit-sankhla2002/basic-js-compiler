@@ -4,7 +4,7 @@ import Docker from "dockerode";
 const docker = new Docker();
 
 export const runCodeInContainer = (filename: string, callback: Function) => {
-  const filepath = `/Users/mohitsankhla/Projects/code-backend/code/${filename}.js`;
+  const filepath = `/Users/mohitsankhla/Projects/basic-js-compiler/code-backend/code/${filename}.js`;
   fs.readFile(filepath, "utf8", (err, data) => {
     if (err) {
       console.error("Error reading file:", err);

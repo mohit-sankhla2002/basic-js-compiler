@@ -10,7 +10,7 @@ const Editor = () => {
 		setOutput("Loading...");
         const res = await axios.post("http://localhost:3000/code", { code: editor?.getValue() });
 		if (res.status == 200) {
-			console.log(res.data.output);
+			setOutput(JSON.stringify(res.data.output));
 		} else {
 			console.log(res.data.error);
 		}
@@ -27,6 +27,7 @@ const Editor = () => {
 					minimap: {
 						enabled: false
 					},
+					cursorStyle: "block"
 				});
 			});
 		}
@@ -36,13 +37,16 @@ const Editor = () => {
 
 	return <div className='flex flex-col w-full gap-2'>
 		<div className='w-full flex md:flex-row flex-col gap-[2vw] items-center'>
-        	<div ref={monacoEl} className='w-[80vw] h-[90vh]'></div>
+        	{monacoEl !== null && <div ref={monacoEl} className='w-[80vw] h-[90vh]'></div>}
+			
 			<div className='card w-[18vw] bg-slate-200 h-3/5'>
-				<div className='card-body'>
+				<div className='card-body max-h-[300px] overflow-scroll'>
 					<div className="card-title text-lg text-black">
 						OUTPUT
 					</div>
-					div.
+					<p className='text-gray-700'>
+						{output}
+					</p>
 				</div>
 			</div>
 		</div>
